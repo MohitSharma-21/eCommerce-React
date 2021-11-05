@@ -11,8 +11,8 @@ const Motherboard = (props) => {
         props.getProducts('Motherboard');
     }, []);
 
-    const renderList = props.prodList.map(({ id, img, price, title }) => {
-        return <Item id={id} title={title} src={img} price={price} />;
+    const renderList = props.prodList.map(({ _id, img, price, title }) => {
+        return <Item id={_id} title={title} src={img} price={price} />;
     })
 
 

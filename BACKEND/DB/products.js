@@ -1,4 +1,4 @@
-const data = [
+const Products = [
     {
         id: 1,
         type: 'Motherboard',
@@ -58,4 +58,4 @@ const data = [
 
 ];
 
-export default data;
+module.exports = { Products};

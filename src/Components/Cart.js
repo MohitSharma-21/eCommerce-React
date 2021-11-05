@@ -18,6 +18,7 @@ const Cart = (props) => {
     return (
         <div className="CartItems">
             {renderList}
+            
         </div>
     );
 }

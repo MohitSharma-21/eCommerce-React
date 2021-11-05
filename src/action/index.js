@@ -15,14 +15,12 @@ export const subItem = (id) => {
 };
 
 export const getProducts = (TYPE) => {
-    // console.log(TYPE);
     return async function (dispatch) {
         const response = await axios({
             method: 'get',
-            url: 'http://localhost:5000/api/products',
-            headers: { type: TYPE }
+            url: `http://localhost:5000/api/products/${TYPE}`,
+            headers: { type: TYPE  } 
         })
-
         dispatch({ type: 'FETCH_PRODUCTS', payload: response.data });
     };
 }
@@ -49,15 +47,10 @@ export const getCartItems = () => {
     };
 }
 
-export const removeFromCart = (ID) => {
-    // console.log(ID + ' ' + typeof (ID));
+export const removeFromCart = (id) => {
     return async function (dispatch) {
-        const response = await axios.post(`http://localhost:5000/cart/products/remove`, {}, {
-            headers: {
-                id: ID,
-            }
-        });
-        // console.log(response.data);
+        const response = await axios.delete(`http://localhost:5000/cart/products/remove/${id}`, 
+        );
         dispatch({ type: 'FETCH_CART_ITEMS', payload: response.data });
     }
 }

@@ -1,13 +1,21 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { addItem, subItem, getProducts } from '../action';
 
 const AddSubItem = (props) => {
+    const [quantity, setquantity] = useState(0);
+
     const addOnClick = (id) => {
+        setquantity(prevquantity => prevquantity+1);
         props.addItem(id);
     }
 
     const subOnClick = (id) => {
+        
+        if(quantity>0) 
+        {
+            setquantity(prevquantity => prevquantity-1);
+        }
         props.subItem(id);
     }
 
@@ -17,7 +25,8 @@ const AddSubItem = (props) => {
                 -
             </button>
             <div className="countItem" >
-                {props.items[props.id]}
+                {/* {props.items[props.id]} */}
+                {quantity}
             </div>
             <button className="ui small button" onClick={() => addOnClick(props.id)}>
                 +

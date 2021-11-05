@@ -38,10 +38,6 @@ const AddProduct = (props) => {
         <div className="mainContainer">
             <form class="ui form">
                 <div class="field">
-                    <label>ID</label>
-                    <input type="text" name="ID" value={Id} placeholder="ID" onChange={e => setId(e.target.value)} />
-                </div>
-                <div class="field">
                     <label>Product Name</label>
                     <input type="text" name="Product-Name" value={Title} placeholder="Product Name" onChange={e => setTitle(e.target.value)} />
                 </div>

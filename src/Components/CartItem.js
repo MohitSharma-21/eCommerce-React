@@ -5,16 +5,16 @@ import '../css/CartItem.css';
 import { removeFromCart } from '../action';
 
 const CartItem = (props) => {
-
-    const remove = () => {
-        props.removeFromCart(props.obj.id);
-        console.log('clicked');
+    
+    const remove = (id) => {
+        console.log(id)
+        props.removeFromCart(id);
     }
 
 
     return (
         <div className="cartItem">
-            <div onClick={remove}>
+            <div onClick={() => remove(props.obj._id)}>
                 <i class="window close icon" ></i>
             </div>
             <div className="itemImage">
