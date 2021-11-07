@@ -10,6 +10,7 @@ const Footer = () => {
                     <i class="copyright outline icon big"></i>
                     <span className="year">2021 - </span>
                     <img src="/images/myname.png" />
+                    {/* <h1>Mohit Kumar Sharma</h1> */}
                 </div>
                 <div className="icons">
                     {/* <i class="envelope icon huge"></i> */}

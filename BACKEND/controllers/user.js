@@ -37,7 +37,6 @@ const login = async (req, res) => {
                   if (result)
                   {
                     res.status(200).send({
-                      email: user.email,
                       token: result.token,
                     });
                     console.log("loggedin")

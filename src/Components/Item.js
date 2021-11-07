@@ -1,4 +1,4 @@
-import React from 'react';
+import {React,useState} from 'react';
 import { connect } from 'react-redux';
 
 import '../css/Item.css';
@@ -7,13 +7,22 @@ import { makeZero, addItemToCart, getCartItems } from '../action';
 
 const Item = (props) => {
 
+    const [quantity, setquantity] = useState(0);
+
+    const addOnClick = (id) => {
+        setquantity(prevquantity => prevquantity+1);
+    }
+    
+    const subOnClick = (id) => {
+        if(quantity>0) 
+            setquantity(prevquantity => prevquantity-1);
+    }
     const addToCart = async (id) => {
-        await props.makeZero(id);
-        await props.addItemToCart(id, props.items[id]);
+        await props.makeZero(quantity);
+        await props.addItemToCart(id, quantity);
         await props.getCartItems();
     }
 
-    // console.log(props.cartItems);
 
     return (
         <div className="fullItem">
@@ -27,11 +36,11 @@ const Item = (props) => {
                 <div className="priceItem">
                     &#8377;{props.price}
                 </div>
-                <AddSubItem id={props.id} />
+                <AddSubItem id={props.id} quantity={quantity} addOnClick={addOnClick} subOnClick={subOnClick} />
             </div>
             <div className="CartAndBuy">
                 <div className="ui buttons">
-                    <button className="ui button" onClick={() => addToCart(props.id)}>Add to Cart</button>
+                    <button className="ui button" onClick={() => {setquantity(0); addToCart(props.id)}}>Add to Cart</button>
                     <div className="or"></div>
                     <button className="ui positive button">Buy Now</button>
                 </div>

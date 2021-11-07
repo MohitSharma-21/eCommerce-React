@@ -45,33 +45,39 @@ const addProduct = async (req, res) => {
 
 const addItemToCart = async (req, res) => {
   res.header("Access-Control-Allow-Origin", "*");
-
-  const prod = await Product.find({ _id: req.params.id });
-  // console.log(prod);
-
-  const currItem = new Product({
-    dbType: "Cart",
-    quantity: req.params.quantity,
-    title: prod[0].title,
-    price: prod[0].price,
-    img: prod[0].img,
+  User.findByIdAndUpdate(req.user, {
+    $push: {
+      cart: {
+        item: req.params.id,
+        quantity: req.params.quantity,
+      },
+    },
+  }).then((data) => {
+    res.send("Successfully saved to DB");
   });
-  await currItem.save();
-  res.send("Successfully saved to DB");
 };
 
 const getCartItems = async (req, res) => {
   res.header("Access-Control-Allow-Origin", "*");
-  const prods = await Product.find({ dbType: "Cart" });
-  res.send(prods);
+  User.findById(req.user)
+    .populate("cart.item")
+    .then((data) => {
+      console.log(data.cart);
+      res.send(data.cart);
+    });
 };
 
 const removeFromCart = async (req, res) => {
   res.header("Access-Control-Allow-Origin", "*");
-  await Product.findOneAndDelete({ _id: req.params.id, dbType: "Cart" });
-
-  const prods = await Product.find({ dbType: "Cart" });
-  res.send(prods);
+  User.findByIdAndUpdate(req.user, {
+    $pull: { cart: { _id: req.params.id } },
+  }).then(() => {
+    User.findById(req.user)
+      .populate("cart.item")
+      .then((data) => {
+        res.send(data.cart);
+      });
+  });
 };
 
 module.exports = {

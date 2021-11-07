@@ -18,20 +18,20 @@ const CartItem = (props) => {
                 <i class="window close icon" ></i>
             </div>
             <div className="itemImage">
-                <img src={props.obj.img} />
+                <img src={props.obj.item.img} />
             </div>
             <div className="itemInfo">
                 <div className="itemTitle">
-                    {props.obj.title}
+                    {props.obj.item.title}
                 </div>
                 <div className="Price">
-                    Price : <span className="spaceIt">{props.obj.price}</span>
+                    Price : <span className="spaceIt">{props.obj.item.price}</span>
                 </div>
                 <div>
                     Quantity : <span className="spaceIt">{props.obj.quantity}</span>
                 </div>
                 <div>
-                    Total = <span className="spaceIt">{(parseInt(props.obj.price.replace(/,/g, '')) * props.obj.quantity).toLocaleString()}</span>
+                    Total = <span className="spaceIt">{(parseInt(props.obj.item.price.replace(/,/g, '')) * props.obj.quantity).toLocaleString()}</span>
                 </div>
             </div>
 

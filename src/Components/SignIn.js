@@ -18,9 +18,10 @@ const SignIn = () => {
       password: pass,
     };
 
-    axios
-      .post("http://localhost:5000/auth/signin", data)
-      .then((res) =>  localStorage.setItem("Token", res.data.token));
+    axios.post("http://localhost:5000/auth/signin", data).then((res) => {
+      localStorage.setItem("Token", res.data.token);
+      window.location.href = "/";
+    });
   };
 
   return (
